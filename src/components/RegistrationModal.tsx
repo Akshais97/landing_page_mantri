@@ -54,7 +54,7 @@ export default function RegistrationModal({
         {/* Dynamic Compliance Seal */}
         <div className="p-3 bg-stone-950 text-center flex items-center justify-center gap-1.5 text-[10px] text-stone-500 border-t border-stone-850">
           <ShieldCheck className="w-3.5 h-3.5 text-gold/60" />
-          Secure 256-bit Connection | RERA details to be verified.
+          Secure 256-bit Connection
         </div>
       </div>
     </div>
