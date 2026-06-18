@@ -5,7 +5,6 @@ import {
   ArrowRight, 
   Clock, 
   Phone, 
-  Mail, 
   Database
 } from "lucide-react";
 import { 
@@ -327,56 +326,64 @@ export default function App() {
       </section>
 
       {/* 18. ACCESSIBLE FOOTER (Section 16) */}
-      <footer className="bg-stone-950 border-t border-gold/15 py-16 text-stone-400 text-xs relative overflow-hidden">
+      <footer className="bg-[#080706] border-t border-gold/20 py-14 md:py-16 text-stone-400 text-xs relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-start pb-12 border-b border-stone-900">
-            
-            {/* Brand column left */}
-            <div className="md:col-span-7 text-left space-y-4">
-              <div className="h-28 w-[260px] overflow-hidden flex items-center justify-start">
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_340px] gap-12 lg:gap-16 items-start pb-10 border-b border-gold/10">
+            <div className="text-left space-y-6">
+              <div className="h-28 w-72 overflow-hidden flex items-center justify-start">
                 <img
                   src="/assets/logo.svg"
                   alt="Codename The Legend"
-                  className="h-full w-full object-contain scale-[3.6] origin-center pointer-events-none invert"
+                  className="h-full w-full object-contain scale-[3.25] origin-center pointer-events-none invert"
                 />
               </div>
-              <p className="text-stone-400 text-[11px] leading-relaxed">
+
+              <p className="max-w-2xl text-stone-300 text-sm leading-7">
                 South India's First Greek-Themed Stacked Villa Luxury Residences, planned strictly to host private generational legends with infinite layouts, no common walls, and majestic forest trails.
               </p>
-              
-              <div className="flex gap-4">
-                <a 
+
+              <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-[12px] tracking-[0.08em]">
+                <a
                   href={`tel:${PROJECT_INFO.phoneNumber.replace(/\s+/g, "")}`}
-                  className="flex items-center gap-1.5 text-gold hover:text-white transition font-mono"
+                  className="inline-flex items-center gap-2 text-gold hover:text-white transition font-mono"
                 >
-                  <Phone className="w-3.5 h-3.5" /> <span>{PROJECT_INFO.phoneNumber}</span>
+                  <Phone className="w-4 h-4" />
+                  <span>{PROJECT_INFO.phoneNumber}</span>
                 </a>
-                <span className="text-stone-700">|</span>
-                <span className="flex items-center gap-1.5 font-mono text-[11px]">
-                  <Compass className="w-3.5 h-3.5 text-gold" /> Yelahanka, North Bangalore
+                <span className="hidden sm:block h-4 w-px bg-gold/20" />
+                <span className="inline-flex items-center gap-2 font-mono text-stone-300">
+                  <Compass className="w-4 h-4 text-gold" />
+                  <span>Yelahanka, North Bangalore</span>
                 </span>
               </div>
             </div>
 
-            {/* Quick Section Links middle */}
-            <div className="md:col-span-5 text-left md:text-right">
-              <h5 className="font-serif text-gold text-sm uppercase tracking-widest font-semibold mb-4">
-                CAMPAIGN DIRECTORIES
-              </h5>
-              <div className="space-y-2 text-sm">
-                <button onClick={() => scrollToSection("story")} className="block md:ml-auto text-stone-400 hover:text-white transition">Story Concept</button>
-                <button onClick={() => scrollToSection("final-form")} className="block md:ml-auto text-stone-400 hover:text-white transition">Private Preview Trailer</button>
+            <div className="lg:text-right space-y-8">
+              <div>
+                <h5 className="font-serif text-gold text-sm uppercase tracking-[0.26em] font-semibold mb-5">
+                  CAMPAIGN DIRECTORIES
+                </h5>
+                <div className="flex flex-col items-start lg:items-end gap-3 text-sm">
+                  <button onClick={() => scrollToSection("story")} className="text-stone-300 hover:text-white transition">
+                    Story Concept
+                  </button>
+                  <button onClick={() => scrollToSection("lakeside")} className="text-stone-300 hover:text-white transition">
+                    Private Preview Trailer
+                  </button>
+                  <button onClick={() => scrollToSection("final-form")} className="text-stone-300 hover:text-white transition">
+                    Book A Slot
+                  </button>
+                </div>
               </div>
+
+            
             </div>
-
-            {/* Client Checking diagnostic tool desk */}
-           
-
           </div>
 
-         
-
+          <div className="pt-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 text-[10px] tracking-[0.2em] uppercase font-mono text-stone-600">
+            <span>&copy; {new Date().getFullYear()} CODENAME: THE LEGEND</span>
+            <span>Private preview campaign. Details subject to final builder confirmation.</span>
+          </div>
         </div>
       </footer>
 
