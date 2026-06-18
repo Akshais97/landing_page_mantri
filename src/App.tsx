@@ -79,7 +79,7 @@ export default function App() {
           {/* Brand Logo */}
           <div className="flex items-center text-left">
             <img
-              src="assets/logo.svg"
+              src="/assets/logo.svg"
               alt="Codename The Legend"
               className="h-[88px] w-[190px] sm:w-[230px] object-contain scale-[4.2] origin-center pointer-events-none"
             />
@@ -115,7 +115,7 @@ export default function App() {
         {/* Cinematic Hero Banner */}
         <div className="relative w-full h-full overflow-hidden bg-stone-950">
           <InteractiveImage 
-            src="assets/Surya_Phase-1_master.jpg"
+            src="/assets/Surya_Phase-1_master.jpg"
             alt="Hero banner for Codename: The Legend"
             parentClass="relative w-full h-full overflow-hidden group"
             className="w-full h-full object-contain object-center"
@@ -132,7 +132,7 @@ export default function App() {
             <div className="lg:col-span-5 relative group">
               <div className="absolute top-4 left-4 -translate-x-4 -translate-y-4 inset-0 border border-gold/25 rounded-none pointer-events-none transition group-hover:translate-x-0 group-hover:translate-y-0 duration-500" />
               <InteractiveImage 
-                src="assets/curtain.jpg" 
+                src="/assets/curtain.jpg" 
                 alt="Classical Greek whisper sculptures representing the rumors of the legend"
                 parentClass="aspect-4/5 rounded-none overflow-hidden relative shadow-2xl bg-stone-950"
               />
@@ -288,7 +288,7 @@ export default function App() {
         {/* Dynamic Dark Marble Texture backdrop */}
         <div className="absolute inset-0 opacity-20 pointer-events-none">
           <InteractiveImage 
-            src="assets/project_image.jpeg" 
+            src="/assets/project_image.jpeg" 
             alt="Dark charcoal premium marble texture bg representation"
             className="w-full h-full object-cover"
           />
@@ -336,7 +336,7 @@ export default function App() {
             <div className="md:col-span-7 text-left space-y-4">
               <div className="h-28 w-[260px] overflow-hidden flex items-center justify-start">
                 <img
-                  src="assets/logo.svg"
+                  src="/assets/logo.svg"
                   alt="Codename The Legend"
                   className="h-full w-full object-contain scale-[3.6] origin-center pointer-events-none invert"
                 />

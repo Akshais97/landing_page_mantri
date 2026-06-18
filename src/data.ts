@@ -207,6 +207,9 @@ export const LIFESTYLE_ITEMS: LifestyleCard[] = [
 
 export const DEFAULT_FALLBACK_IMAGES: Record<string, string> = {
   "https://img.youtube.com/vi/lc3F2qo32H0/maxresdefault.jpg": "https://img.youtube.com/vi/lc3F2qo32H0/sddefault.jpg",
+  "/assets/Surya_Phase-1_master.jpg": "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1600&q=80",
+  "/assets/curtain.jpg": "https://images.unsplash.com/photo-1601887389937-0b02c26b6c3c?auto=format&fit=crop&w=1200&q=80",
+  "/assets/project_image.jpeg": "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1200&q=80",
   "assets/hero-greek-entrance.jpg": "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1600&q=80",
   "assets/mobile-hero.jpg": "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1080&q=80",
   "assets/curtain-reveal.jpg": "https://images.unsplash.com/photo-1601887389937-0b02c26b6c3c?auto=format&fit=crop&w=1200&q=80",
