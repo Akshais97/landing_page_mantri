@@ -1,0 +1,8 @@
+{
+  "name": "Asset Remix: Codename: The Legend",
+  "description": "Premium Greek-themed stacked villa luxury residences in Yelahanka, North Bangalore. Register for private previews and early investor pricing.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
