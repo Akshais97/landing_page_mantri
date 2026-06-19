@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { DEFAULT_FALLBACK_IMAGES } from "../data";
 
 interface InteractiveImageProps {
@@ -9,6 +9,16 @@ interface InteractiveImageProps {
   parentClass?: string;
 }
 
+const resolveAsset = (path: string) => {
+  if (!path) return "";
+  if (path.startsWith("http://") || path.startsWith("https://") || path.startsWith("data:")) {
+    return path;
+  }
+  const cleanPath = path.startsWith("/") ? path.substring(1) : path;
+  const baseUrl = import.meta.env.BASE_URL || "/";
+  return `${baseUrl}${cleanPath}`;
+};
+
 export default function InteractiveImage({
   id,
   src,
@@ -16,9 +26,16 @@ export default function InteractiveImage({
   className = "",
   parentClass = "relative overflow-hidden group",
 }: InteractiveImageProps) {
-  const [currentSrc, setCurrentSrc] = useState<string>(src);
+  const [currentSrc, setCurrentSrc] = useState<string>(resolveAsset(src));
   const [hasFailed, setHasFailed] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
+
+  // Sync state if src changes
+  useEffect(() => {
+    setCurrentSrc(resolveAsset(src));
+    setHasFailed(false);
+    setLoading(true);
+  }, [src]);
 
   const handleError = () => {
     if (!hasFailed) {
@@ -26,7 +43,7 @@ export default function InteractiveImage({
       // Fallback to high resolution Unsplash matching copy
       const fallback = DEFAULT_FALLBACK_IMAGES[src];
       if (fallback) {
-        setCurrentSrc(fallback);
+        setCurrentSrc(resolveAsset(fallback));
       } else {
         setCurrentSrc(`https://picsum.photos/seed/${alt.replace(/\s+/g, "")}/1200/800`);
       }

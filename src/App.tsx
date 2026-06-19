@@ -16,6 +16,16 @@ import RegistrationForm from "./components/RegistrationForm";
 import RegistrationModal from "./components/RegistrationModal";
 import AdminConsole from "./components/AdminConsole";
 
+const resolveAsset = (path: string) => {
+  if (!path) return "";
+  if (path.startsWith("http://") || path.startsWith("https://") || path.startsWith("data:")) {
+    return path;
+  }
+  const cleanPath = path.startsWith("/") ? path.substring(1) : path;
+  const baseUrl = import.meta.env.BASE_URL || "/";
+  return `${baseUrl}${cleanPath}`;
+};
+
 export default function App() {
   // Lead popup states
   const [modalOpen, setModalOpen] = useState(false);
@@ -78,7 +88,7 @@ export default function App() {
           {/* Brand Logo */}
           <div className="flex items-center text-left">
             <img
-              src="/assets/logo.svg"
+              src={resolveAsset("/assets/logo.svg")}
               alt="Codename The Legend"
               className="h-[88px] w-[190px] sm:w-[230px] object-contain scale-[4.2] origin-center pointer-events-none"
             />
@@ -332,7 +342,7 @@ export default function App() {
             <div className="text-left space-y-6">
               <div className="h-28 w-72 overflow-hidden flex items-center justify-start">
                 <img
-                  src="/assets/logo.svg"
+                  src={resolveAsset("/assets/logo.svg")}
                   alt="Codename The Legend"
                   className="h-full w-full object-contain scale-[3.25] origin-center pointer-events-none invert"
                 />
