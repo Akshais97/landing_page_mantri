@@ -115,6 +115,19 @@ export default function App() {
             >
               BOOK A SLOT
             </button>
+            <a
+              href={`https://wa.me/917042020355?text=${encodeURIComponent("Hi, I am interested in Mantri’s Legends Project. Please share more details.")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center hover:scale-105 transition-transform duration-300 shrink-0"
+              title="Contact on WhatsApp"
+            >
+              <img
+                src={resolveAsset("/assets/whatsapp.png")}
+                alt="WhatsApp"
+                className="h-10 w-10 object-contain"
+              />
+            </a>
           </div>
         </div>
       </header>

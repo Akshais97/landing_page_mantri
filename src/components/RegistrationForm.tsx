@@ -202,65 +202,7 @@ export default function RegistrationForm({
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            <div className="space-y-1 text-left">
-              <label className="text-[9px] uppercase tracking-widest text-taupe font-bold block">
-                Preferred Visit Date
-              </label>
-              <input
-                type="date"
-                value={formData.visitDate}
-                onChange={(e) => setFormData({ ...formData, visitDate: e.target.value })}
-                className="w-full border-b border-stone-800 py-2 focus:border-gold outline-none transition-colors text-sm px-1 bg-transparent text-stone-300 font-sans"
-              />
-            </div>
-            {showBudget ? (
-              <div className="space-y-1 text-left">
-                <label className="text-[9px] uppercase tracking-widest text-taupe font-bold block">
-                  Budget Range
-                </label>
-                <select
-                  value={formData.budgetRange}
-                  onChange={(e) => setFormData({ ...formData, budgetRange: e.target.value })}
-                  className="w-full border-b border-stone-800 py-2.5 focus:border-gold outline-none transition-colors text-sm px-1 bg-charcoal text-marble cursor-pointer font-sans"
-                >
-                  {budgetOptions.map((opt) => (
-                    <option key={opt} value={opt} className="bg-charcoal text-marble font-sans">
-                      {opt}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            ) : (
-              <div className="space-y-1 text-left">
-                <label className="text-[9px] uppercase tracking-widest text-taupe font-bold block">
-                  Preferred Villa Variant
-                </label>
-                <select
-                  className="w-full border-b border-stone-800 py-2.5 focus:border-gold outline-none transition-colors text-sm px-1 bg-charcoal text-marble cursor-pointer font-sans"
-                  defaultValue="stacked-terrace"
-                >
-                  <option value="stacked-standard" className="bg-charcoal">4.5 BHK Standard (2500 Sq.Ft)</option>
-                  <option value="stacked-terrace" className="bg-charcoal">4.5 BHK Terrace stacked villa</option>
-                </select>
-              </div>
-            )}
-          </div>
 
-          {!compact && (
-            <div className="space-y-1 text-left">
-              <label className="text-[9px] uppercase tracking-widest text-taupe font-bold block">
-                Message / Custom Requests
-              </label>
-              <textarea
-                rows={2}
-                placeholder="Share any preferred timings or specific requisites..."
-                value={formData.message}
-                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                className="w-full border-b border-stone-800 py-2 focus:border-gold outline-none transition-colors text-sm px-1 bg-transparent text-marble placeholder-stone-600 font-sans resize-none"
-              ></textarea>
-            </div>
-          )}
 
           <div className="pt-2 space-y-4">
             <label className="flex items-start gap-3 text-left cursor-pointer group">

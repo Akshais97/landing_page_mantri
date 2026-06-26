@@ -104,9 +104,6 @@ def main():
     first_visible(wait, 'input[placeholder="+91 98765 43210"]', form).send_keys("+91 98765 43210")
     first_visible(wait, 'input[type="email"]', form).send_keys("selenium.legend@example.com")
 
-    visit_date = first_visible(wait, 'input[type="date"]', form)
-    driver.execute_script("arguments[0].value = '2026-07-15'; arguments[0].dispatchEvent(new Event('input', { bubbles: true }));", visit_date)
-
     consent = first_visible(wait, 'input[type="checkbox"]', form)
     if not consent.is_selected():
       consent.click()
