@@ -280,13 +280,13 @@ export default function App() {
               onClick={() => scrollToSection("final-form")}
               className="bg-gold hover:bg-gold/90 text-neutral-950 font-sans font-bold text-[10px] tracking-widest uppercase py-4 px-10 rounded-none transition cursor-pointer"
             >
-              BOOK A SLOT
+              BOOK A SITE VISIT
             </button>
             <a
               href={`tel:${PROJECT_INFO.phoneNumber.replace(/\s+/g, "")}`}
               className="hover:bg-white/10 border border-white/20 text-white font-sans font-bold text-[10px] tracking-widest uppercase py-4 px-10 rounded-none transition"
             >
-              CALL NOW
+              Request Callback
             </a>
           </div>
         </div>
