@@ -1,5 +1,6 @@
 import { useState, FormEvent } from "react";
 import { Check, Loader2, Sparkles, X } from "lucide-react";
+import { resolveLeadEndpoint } from "../lib/leadEndpoint.js";
 
 interface LeadData {
   id: string;
@@ -45,13 +46,21 @@ export default function RegistrationForm({
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState("");
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setError("");
 
-    // Simple validation
-    if (!formData.fullName || !formData.phone || !formData.email) {
+    const fullName = formData.fullName.trim();
+    const phone = formData.phone.trim();
+    const email = formData.email.trim();
+
+    if (!fullName || !phone || !email) {
       setError("Please complete all required fields (*).");
+      return;
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setError("Please enter a valid email address.");
       return;
     }
 
@@ -62,44 +71,56 @@ export default function RegistrationForm({
 
     setLoading(true);
 
-    // Simulate luxury API response lag
-    setTimeout(() => {
-      try {
-        const newLead: LeadData = {
-          id: `lead-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
-          fullName: formData.fullName,
-          phone: formData.phone,
-          email: formData.email,
-          visitDate: formData.visitDate || "Not Specified",
-          contactConsent: formData.contactConsent,
-          budgetRange: showBudget ? formData.budgetRange : "₹2.5 Cr Onwards",
-          message: formData.message || "Requesting pre-launch details & floor plans.",
-          timestamp: new Date().toLocaleDateString("en-IN", {
-            hour: "2-digit",
-            minute: "2-digit",
-          }),
-          source: source,
-        };
+    try {
+      const response = await fetch(resolveLeadEndpoint(import.meta.env.BASE_URL), {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          fullName,
+          phone,
+          email,
+        }),
+      });
 
-        // Store to localStorage so user can verify lead capture
-        const existingLeadsRaw = localStorage.getItem("codename_the_legend_leads");
-        const existingLeads = existingLeadsRaw ? JSON.parse(existingLeadsRaw) : [];
-        existingLeads.unshift(newLead);
-        localStorage.setItem("codename_the_legend_leads", JSON.stringify(existingLeads));
+      const result = await response.json().catch(() => ({}));
 
-        // Dispatch storage event to update any active indicators
-        window.dispatchEvent(new Event("storage_leads_updated"));
-
-        setIsSubmitted(true);
-        if (onSuccess) {
-          setTimeout(() => onSuccess(), 2500);
-        }
-      } catch (err) {
-        setError("Your registration request could not be processed. Please try again.");
-      } finally {
-        setLoading(false);
+      if (!response.ok) {
+        throw new Error(result.error || "Unable to submit enquiry right now. Please try again.");
       }
-    }, 1200);
+
+      const newLead: LeadData = {
+        id: `lead-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
+        fullName,
+        phone,
+        email,
+        visitDate: formData.visitDate || "Not Specified",
+        contactConsent: formData.contactConsent,
+        budgetRange: showBudget ? formData.budgetRange : "₹2.5 Cr Onwards",
+        message: formData.message || "Requesting pre-launch details & floor plans.",
+        timestamp: new Date().toLocaleDateString("en-IN", {
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
+        source: source,
+      };
+
+      const existingLeadsRaw = localStorage.getItem("codename_the_legend_leads");
+      const existingLeads = existingLeadsRaw ? JSON.parse(existingLeadsRaw) : [];
+      existingLeads.unshift(newLead);
+      localStorage.setItem("codename_the_legend_leads", JSON.stringify(existingLeads));
+      window.dispatchEvent(new Event("storage_leads_updated"));
+
+      setIsSubmitted(true);
+      if (onSuccess) {
+        setTimeout(() => onSuccess(), 2500);
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Your registration request could not be processed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const budgetOptions = [
@@ -221,7 +242,8 @@ export default function RegistrationForm({
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-[#171717] border border-gold hover:bg-gold hover:text-[#171717] text-white py-4 text-[11px] font-bold tracking-[0.2em] uppercase transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
+              aria-busy={loading}
+              className="w-full bg-[#171717] border border-gold hover:bg-gold hover:text-[#171717] text-white py-4 text-[11px] font-bold tracking-[0.2em] uppercase transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer disabled:cursor-not-allowed disabled:opacity-70"
             >
               {loading ? (
                 <>

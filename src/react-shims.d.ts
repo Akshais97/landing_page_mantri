@@ -4,6 +4,14 @@ declare namespace JSX {
   }
 }
 
+interface ImportMetaEnv {
+  readonly BASE_URL: string;
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
+}
+
 declare module "react" {
   export const StrictMode: any;
   export type SetStateAction<S> = S | ((prevState: S) => S);

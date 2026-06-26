@@ -116,7 +116,7 @@ export default function App() {
               BOOK A SLOT
             </button>
             <a
-              href={`https://wa.me/917042020355?text=${encodeURIComponent("Hi, I am interested in Mantri’s Legends Project. Please share more details.")}`}
+              href={`https://wa.me/917042020355?text=${encodeURIComponent("Hi, I am interested in THE LEGENDS Project. Please share more details.")}`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center hover:scale-105 transition-transform duration-300 shrink-0"
