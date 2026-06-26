@@ -50,11 +50,11 @@ export default function RegistrationForm({
     e.preventDefault();
     setError("");
 
-    const fullName = formData.fullName.trim();
+    const name = formData.fullName.trim();
     const phone = formData.phone.trim();
     const email = formData.email.trim();
 
-    if (!fullName || !phone || !email) {
+    if (!name || !phone || !email) {
       setError("Please complete all required fields (*).");
       return;
     }
@@ -78,7 +78,7 @@ export default function RegistrationForm({
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          fullName,
+          name,
           phone,
           email,
         }),
@@ -92,7 +92,7 @@ export default function RegistrationForm({
 
       const newLead: LeadData = {
         id: `lead-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
-        fullName,
+        fullName: name,
         phone,
         email,
         visitDate: formData.visitDate || "Not Specified",

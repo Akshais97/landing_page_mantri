@@ -57,7 +57,7 @@ export const PROJECT_INFO = {
   possession: "December 2028",
   urgency: "Only limited pre-launch inventory available. Book early for priority unit selection.",
   reraCompliance: "RERA details to be updated. Distances and upcoming infrastructure are subject to final verification.",
-  phoneNumber: "+91 80 4040 1928", // Exclusive phone line style placeholder
+  phoneNumber: "+91 70 4202 0355", // Exclusive phone line style placeholder
 };
 
 export const KEY_HIGHLIGHTS: Highlight[] = [

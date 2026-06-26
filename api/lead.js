@@ -1,4 +1,6 @@
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const DEFAULT_CRM_ENDPOINT = "https://sakhaa-dev.sakhaa.ai/api/v1/capture/person";
+const DEFAULT_CRM_LEAD_SOURCE = "legends-landing-page";
 
 function getAllowedOrigins() {
   return String(process.env.ALLOWED_ORIGINS || "")
@@ -45,6 +47,10 @@ function requireEnvVar(name) {
   return value;
 }
 
+function getOptionalEnvVar(name, fallback) {
+  return process.env[name] || fallback;
+}
+
 export default async function handler(req, res) {
   const originAllowed = applyCors(req, res);
 
@@ -61,11 +67,11 @@ export default async function handler(req, res) {
   }
 
   const body = parseBody(req.body);
-  const fullName = String(body.fullName || "").trim();
+  const name = String(body.name || "").trim();
   const phone = String(body.phone || "").trim();
   const email = String(body.email || "").trim();
 
-  if (!fullName || !phone || !email) {
+  if (!name || !phone || !email) {
     return res.status(400).json({ error: "Name, phone, and email are required." });
   }
 
@@ -76,29 +82,23 @@ export default async function handler(req, res) {
   let crmEndpoint;
   let crmApiKey;
   let crmApiSecret;
-  let crmProjectName;
   let crmLeadSource;
 
   try {
-    crmEndpoint = requireEnvVar("CRM_ENDPOINT");
+    crmEndpoint = getOptionalEnvVar("CRM_ENDPOINT", DEFAULT_CRM_ENDPOINT);
     crmApiKey = requireEnvVar("CRM_API_KEY");
     crmApiSecret = requireEnvVar("CRM_API_SECRET");
-    crmProjectName = requireEnvVar("CRM_PROJECT_NAME");
-    crmLeadSource = requireEnvVar("CRM_LEAD_SOURCE");
+    crmLeadSource = getOptionalEnvVar("CRM_LEAD_SOURCE", DEFAULT_CRM_LEAD_SOURCE);
   } catch (error) {
     console.error(error.message);
     return res.status(500).json({ error: "Server configuration error." });
   }
 
   const crmPayload = {
-    name: fullName,
-    phone,
+    name,
     email,
+    phone,
     lead_source: crmLeadSource,
-    custom_fields: {
-      project: crmProjectName,
-      form: "landing-page-enquiry",
-    },
   };
 
   try {
